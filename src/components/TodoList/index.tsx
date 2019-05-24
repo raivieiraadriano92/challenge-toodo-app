@@ -1,6 +1,6 @@
 import React from "react";
 import { ScrollView, SafeAreaView } from "react-native";
-import { Button, Icon, List, Modal } from "@ant-design/react-native";
+import { Icon, List, Modal } from "@ant-design/react-native";
 import { connect } from "react-redux";
 import { bindActionCreators, Dispatch } from "redux";
 import { NavigationScreenProps } from "react-navigation";
@@ -32,23 +32,14 @@ const TodoList = ({
   };
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#f5f5f9" }}>
+    <SafeAreaView style={{ backgroundColor: "#f5f5f9", flex: 1 }}>
       <ScrollView
         automaticallyAdjustContentInsets={false}
         showsHorizontalScrollIndicator={false}
         showsVerticalScrollIndicator={false}
+        style={{ padding: 16 }}
       >
-        <List
-          renderHeader={
-            <Button
-              onPress={() => navigate("TodoForm")}
-              size="small"
-              type="primary"
-            >
-              Add
-            </Button>
-          }
-        >
+        <List>
           {todos.map(todo => (
             <List.Item
               arrow="horizontal"

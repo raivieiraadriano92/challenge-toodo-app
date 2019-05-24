@@ -51,7 +51,7 @@ const TodoForm = ({
           name: Yup.string().required("Required")
         })}
         render={(formikBag: FormikProps<TodoNew>) => (
-          <List renderHeader={"New Todo"}>
+          <List style={{ padding: 16 }}>
             <InputItem
               autoFocus
               clear
