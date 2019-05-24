@@ -20,14 +20,18 @@ As this project has a web app and a native app that has the same business rule, 
 
 - [Repository](https://github.com/raivieiraadriano92/challenge-toodo-core)
 
+## Web App
+
+- [Repository](https://github.com/raivieiraadriano92/challenge-toodo-web)
+
 ## Quickstart
 
 Clone the project:
 
-### `git clone --recursive https://github.com/raivieiraadriano92/challenge-toodo-app.git`
+`git clone --recursive https://github.com/raivieiraadriano92/challenge-toodo-app.git`
 
 In the project directory, you can run:
 
-### `yarn install`
+`yarn install`
 
-### `react-native run-ios or run-android`
+`react-native run-ios or run-android`
