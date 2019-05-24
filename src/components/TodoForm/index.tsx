@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { SafeAreaView } from "react-native";
 import { Button, InputItem, List } from "@ant-design/react-native";
 import { connect } from "react-redux";
 import { bindActionCreators, Dispatch } from "redux";
@@ -10,6 +9,8 @@ import * as Yup from "yup";
 import { ApplicationState } from "../../core/store";
 import { Todo, TodoNew } from "../../core/store/ducks/todos/types";
 import * as TodosActions from "../../core/store/ducks/todos/actions";
+
+import { SafeArea } from "../../styles";
 
 interface StateProps {
   todos: Todo[];
@@ -37,7 +38,7 @@ const TodoForm = ({
   }, []);
 
   return (
-    <SafeAreaView style={{ flex: 1, backgroundColor: "#f5f5f9" }}>
+    <SafeArea>
       <Formik
         ref={ref => {
           refForm = ref;
@@ -70,7 +71,7 @@ const TodoForm = ({
           </List>
         )}
       />
-    </SafeAreaView>
+    </SafeArea>
   );
 };
 

@@ -1,5 +1,4 @@
 import React from "react";
-import { ScrollView, SafeAreaView } from "react-native";
 import { Icon, List, Modal } from "@ant-design/react-native";
 import { connect } from "react-redux";
 import { bindActionCreators, Dispatch } from "redux";
@@ -8,6 +7,10 @@ import { NavigationScreenProps } from "react-navigation";
 import { Todo } from "../../core/store/ducks/todos/types";
 import { ApplicationState } from "../../core/store";
 import * as TodosActions from "../../core/store/ducks/todos/actions";
+
+import { SafeArea } from "../../styles";
+
+import { Scroll } from "./styles";
 
 interface StateProps {
   todos: Todo[];
@@ -32,12 +35,11 @@ const TodoList = ({
   };
 
   return (
-    <SafeAreaView style={{ backgroundColor: "#f5f5f9", flex: 1 }}>
-      <ScrollView
+    <SafeArea>
+      <Scroll
         automaticallyAdjustContentInsets={false}
         showsHorizontalScrollIndicator={false}
         showsVerticalScrollIndicator={false}
-        style={{ padding: 16 }}
       >
         <List>
           {todos.map(todo => (
@@ -57,8 +59,8 @@ const TodoList = ({
             </List.Item>
           ))}
         </List>
-      </ScrollView>
-    </SafeAreaView>
+      </Scroll>
+    </SafeArea>
   );
 };
 

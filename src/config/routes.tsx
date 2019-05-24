@@ -2,15 +2,9 @@ import React from "react";
 import { createAppContainer, createStackNavigator } from "react-navigation";
 import { Button } from "@ant-design/react-native";
 
+import { headerStyle } from "../styles";
 import TodoForm from "../components/TodoForm";
 import TodoList from "../components/TodoList";
-
-const headerStyle = {
-  headerStyle: {
-    backgroundColor: "#001529"
-  },
-  headerTintColor: "#FFF"
-};
 
 const Routes = createAppContainer(
   createStackNavigator(
@@ -19,7 +13,7 @@ const Routes = createAppContainer(
         screen: TodoList,
         navigationOptions: ({ navigation: { navigate } }: any) => ({
           ...headerStyle,
-          title: "Todos",
+          title: "ToDos",
           headerBackTitle: null,
           headerRight: (
             <Button
@@ -37,7 +31,7 @@ const Routes = createAppContainer(
         screen: TodoForm,
         navigationOptions: ({ navigation: { state } }: any) => ({
           ...headerStyle,
-          title: `${state.params && state.params.id ? "Edit" : "New"} Todo`
+          title: `${state.params && state.params.id ? "Edit" : "New"} ToDo`
         })
       }
     },

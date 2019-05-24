@@ -29,6 +29,7 @@
     "@types/react-navigation": "^3.0.7",
     "@types/react-redux": "^7.0.9",
     "@types/react-test-renderer": "^16.8.1",
+    "@types/styled-components": "^4.1.15",
     "@types/yup": "^0.26.13",
     "babel-jest": "^24.8.0",
     "jest": "^24.8.0",
