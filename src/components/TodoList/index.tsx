@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Icon, List, Modal } from "@ant-design/react-native";
 import { connect } from "react-redux";
 import { bindActionCreators, Dispatch } from "redux";
@@ -10,7 +10,7 @@ import * as TodosActions from "../../core/store/ducks/todos/actions";
 
 import { SafeArea } from "../../styles";
 
-import { Scroll } from "./styles";
+import { Scroll, SegmentedControl } from "./styles";
 
 interface StateProps {
   todos: Todo[];
@@ -26,6 +26,20 @@ const TodoList = ({
   todos,
   todoToggle
 }: Props) => {
+  const [list, setList] = useState(todos);
+
+  const handleChangeSegmentedControl = (value: string) => {
+    setList(
+      todos.filter((todo: Todo) => {
+        if (value === "Done") return todo.done;
+
+        if (value === "ToDo") return !todo.done;
+
+        return true;
+      })
+    );
+  };
+
   const handleItemPress = (id: number) => {
     Modal.operation([
       { text: "Edit", onPress: () => navigate("TodoForm", { id }) },
@@ -36,13 +50,17 @@ const TodoList = ({
 
   return (
     <SafeArea>
+      <SegmentedControl
+        values={["All", "ToDo", "Done"]}
+        onValueChange={handleChangeSegmentedControl}
+      />
       <Scroll
         automaticallyAdjustContentInsets={false}
         showsHorizontalScrollIndicator={false}
         showsVerticalScrollIndicator={false}
       >
         <List>
-          {todos.map(todo => (
+          {list.map(todo => (
             <List.Item
               arrow="horizontal"
               key={todo.id}

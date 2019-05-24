@@ -23,6 +23,7 @@ type Props = StateProps & NavigationScreenProps;
 const TodoForm = ({
   navigation: { navigate, state },
   todoAdd,
+  todoEdit,
   todos
 }: Props) => {
   let refForm: Formik<TodoNew> | null;
@@ -45,7 +46,9 @@ const TodoForm = ({
         }}
         initialValues={{ name: "" }}
         onSubmit={(values: TodoNew) => {
-          todoAdd(values);
+          const id = state.params && state.params.id;
+
+          (id ? todoEdit : todoAdd)(values);
           navigate("TodoList");
         }}
         validationSchema={Yup.object().shape({
