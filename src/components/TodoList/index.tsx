@@ -1,18 +1,36 @@
 import React from "react";
 import { ScrollView, SafeAreaView } from "react-native";
-import { List } from "@ant-design/react-native";
+import { Button, Icon, List, Modal } from "@ant-design/react-native";
 import { connect } from "react-redux";
+import { bindActionCreators, Dispatch } from "redux";
+import { NavigationScreenProps } from "react-navigation";
 
 import { Todo } from "../../core/store/ducks/todos/types";
 import { ApplicationState } from "../../core/store";
+import * as TodosActions from "../../core/store/ducks/todos/actions";
 
 interface StateProps {
   todos: Todo[];
+  todoRemove(id: number): void;
+  todoToggle(id: number): void;
 }
 
-type Props = StateProps;
+type Props = StateProps & NavigationScreenProps;
 
-const TodoList = ({ todos }: Props) => {
+const TodoList = ({
+  navigation: { navigate },
+  todoRemove,
+  todos,
+  todoToggle
+}: Props) => {
+  const handleItemPress = (id: number) => {
+    Modal.operation([
+      { text: "Edit", onPress: () => navigate("TodoForm", { id }) },
+      { text: "Remove", onPress: () => todoRemove(id) },
+      { text: "Toggle", onPress: () => todoToggle(id) }
+    ]);
+  };
+
   return (
     <SafeAreaView style={{ flex: 1, backgroundColor: "#f5f5f9" }}>
       <ScrollView
@@ -20,13 +38,29 @@ const TodoList = ({ todos }: Props) => {
         showsHorizontalScrollIndicator={false}
         showsVerticalScrollIndicator={false}
       >
-        <List renderHeader={"Todos"}>
+        <List
+          renderHeader={
+            <Button
+              onPress={() => navigate("TodoForm")}
+              size="small"
+              type="primary"
+            >
+              Add
+            </Button>
+          }
+        >
           {todos.map(todo => (
             <List.Item
-              disabled
-              extra="箭头向右"
               arrow="horizontal"
-              onPress={() => {}}
+              key={todo.id}
+              onPress={() => handleItemPress(todo.id)}
+              thumb={
+                <Icon
+                  color={todo.done ? "#52c41a" : undefined}
+                  name={todo.done ? "check-circle" : "minus-circle"}
+                  style={{ marginRight: 8 }}
+                />
+              }
             >
               {todo.name}
             </List.Item>
@@ -41,4 +75,10 @@ const mapStateToProps = (state: ApplicationState) => ({
   todos: state.todos.list
 });
 
-export default connect(mapStateToProps)(TodoList);
+const mapDispatchToProps = (dispatch: Dispatch) =>
+  bindActionCreators(TodosActions, dispatch);
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(TodoList);

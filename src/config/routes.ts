@@ -1,12 +1,17 @@
-import { createAppContainer, createBottomTabNavigator } from "react-navigation";
+import { createAppContainer, createStackNavigator } from "react-navigation";
 
 import TodoForm from "../components/TodoForm";
 import TodoList from "../components/TodoList";
 
 const Routes = createAppContainer(
-  createBottomTabNavigator(
+  createStackNavigator(
     {
-      TodoList,
+      TodoList: {
+        screen: TodoList,
+        navigationOptions: () => ({
+          header: null
+        })
+      },
       TodoForm
     },
     {
