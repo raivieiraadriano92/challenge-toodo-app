@@ -35,3 +35,12 @@ In the project directory, you can run:
 `yarn install`
 
 `react-native run-ios or run-android`
+
+## Screen Shots
+
+<p>
+  <img src="./docs/images/screen3.png" title="Todo List" width="24%">
+  <img src="./docs/images/screen2.png" title="Todo Form Validation" width="24%">
+  <img src="./docs/images/screen1.png" title="Todo Form" width="24%">
+  <img src="./docs/images/screen4.png" title="Todo Actions" width="24%">
+</p>
