@@ -13,7 +13,7 @@ const Routes = createAppContainer(
         screen: TodoList,
         navigationOptions: ({ navigation: { navigate } }: any) => ({
           ...headerStyle,
-          title: "ToDos",
+          title: "List",
           headerBackTitle: null,
           headerRight: (
             <Button
@@ -31,7 +31,7 @@ const Routes = createAppContainer(
         screen: TodoForm,
         navigationOptions: ({ navigation: { state } }: any) => ({
           ...headerStyle,
-          title: `${state.params && state.params.id ? "Edit" : "New"} ToDo`
+          title: `${state.params && state.params.id ? "Edit" : "New"} Todo`
         })
       }
     },

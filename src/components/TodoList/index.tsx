@@ -26,19 +26,27 @@ const TodoList = ({
   todos,
   todoToggle
 }: Props) => {
+  const [filter, setFilter] = useState("All");
   const [list, setList] = useState(todos);
 
-  const handleChangeSegmentedControl = (value: string) => {
+  useEffect(() => {
+    filterList();
+  }, [filter]);
+
+  useEffect(() => {
+    filterList();
+  }, [todos]);
+
+  const filterList = () =>
     setList(
       todos.filter((todo: Todo) => {
-        if (value === "Done") return todo.done;
+        if (filter === "Done") return todo.done;
 
-        if (value === "ToDo") return !todo.done;
+        if (filter === "ToDo") return !todo.done;
 
         return true;
       })
     );
-  };
 
   const handleItemPress = (id: number) => {
     Modal.operation([
@@ -52,7 +60,7 @@ const TodoList = ({
     <SafeArea>
       <SegmentedControl
         values={["All", "ToDo", "Done"]}
-        onValueChange={handleChangeSegmentedControl}
+        onValueChange={value => setFilter(value)}
       />
       <Scroll
         automaticallyAdjustContentInsets={false}
